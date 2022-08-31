@@ -29,6 +29,7 @@ import type {
 
 export interface UniswapV2FactoryInterface extends utils.Interface {
   functions: {
+    "INIT_CODE_HASH()": FunctionFragment;
     "allPairs(uint256)": FunctionFragment;
     "allPairsLength()": FunctionFragment;
     "createPair(address,address)": FunctionFragment;
@@ -41,6 +42,7 @@ export interface UniswapV2FactoryInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "INIT_CODE_HASH"
       | "allPairs"
       | "allPairsLength"
       | "createPair"
@@ -51,6 +53,10 @@ export interface UniswapV2FactoryInterface extends utils.Interface {
       | "setFeeToSetter"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "INIT_CODE_HASH",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "allPairs",
     values: [PromiseOrValue<BigNumberish>]
@@ -81,6 +87,10 @@ export interface UniswapV2FactoryInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "INIT_CODE_HASH",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "allPairs", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "allPairsLength",
@@ -146,6 +156,8 @@ export interface UniswapV2Factory extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    INIT_CODE_HASH(overrides?: CallOverrides): Promise<[string]>;
+
     allPairs(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -179,6 +191,8 @@ export interface UniswapV2Factory extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  INIT_CODE_HASH(overrides?: CallOverrides): Promise<string>;
 
   allPairs(
     arg0: PromiseOrValue<BigNumberish>,
@@ -214,6 +228,8 @@ export interface UniswapV2Factory extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    INIT_CODE_HASH(overrides?: CallOverrides): Promise<string>;
+
     allPairs(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -264,6 +280,8 @@ export interface UniswapV2Factory extends BaseContract {
   };
 
   estimateGas: {
+    INIT_CODE_HASH(overrides?: CallOverrides): Promise<BigNumber>;
+
     allPairs(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -299,6 +317,8 @@ export interface UniswapV2Factory extends BaseContract {
   };
 
   populateTransaction: {
+    INIT_CODE_HASH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     allPairs(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
