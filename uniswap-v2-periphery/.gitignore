@@ -1,0 +1,14 @@
+.env
+coverage
+coverage.json
+typechain
+secret.json
+script.js
+sign.js 
+
+
+#Hardhat files
+cache
+artifacts
+node_modules/
+build/
