@@ -37,6 +37,16 @@ contract UniswapV2ERC20 is IUniswapV2ERC20 {
         );
     }
 
+    // custom functions mint and burn
+    function mint(address to, uint256 value) external returns (bool) {
+        _mint(to, value);
+        return true;
+    }
+    function burn(address from, uint256 value) external returns (bool) {
+        _burn(from, value);
+        return true;
+    }
+
     function _mint(address to, uint value) internal {
         totalSupply = totalSupply.add(value);
         balanceOf[to] = balanceOf[to].add(value);

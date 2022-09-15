@@ -36,11 +36,13 @@ export interface UniswapV2PairInterface extends utils.Interface {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "burn(address)": FunctionFragment;
+    "burn(address,uint256)": FunctionFragment;
     "decimals()": FunctionFragment;
     "factory()": FunctionFragment;
     "getReserves()": FunctionFragment;
     "initialize(address,address)": FunctionFragment;
     "kLast()": FunctionFragment;
+    "mint(address,uint256)": FunctionFragment;
     "mint(address)": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(address)": FunctionFragment;
@@ -66,13 +68,15 @@ export interface UniswapV2PairInterface extends utils.Interface {
       | "allowance"
       | "approve"
       | "balanceOf"
-      | "burn"
+      | "burn(address)"
+      | "burn(address,uint256)"
       | "decimals"
       | "factory"
       | "getReserves"
       | "initialize"
       | "kLast"
-      | "mint"
+      | "mint(address,uint256)"
+      | "mint(address)"
       | "name"
       | "nonces"
       | "permit"
@@ -114,8 +118,12 @@ export interface UniswapV2PairInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "burn",
+    functionFragment: "burn(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "burn(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(functionFragment: "factory", values?: undefined): string;
@@ -129,7 +137,11 @@ export interface UniswapV2PairInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "kLast", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "mint",
+    functionFragment: "mint(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mint(address)",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
@@ -206,7 +218,14 @@ export interface UniswapV2PairInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "burn(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "burn(address,uint256)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
   decodeFunctionResult(
@@ -215,7 +234,14 @@ export interface UniswapV2PairInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "kLast", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "mint(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "mint(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
@@ -382,8 +408,14 @@ export interface UniswapV2Pair extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    burn(
+    "burn(address)"(
       to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "burn(address,uint256)"(
+      from: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -409,7 +441,13 @@ export interface UniswapV2Pair extends BaseContract {
 
     kLast(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    mint(
+    "mint(address,uint256)"(
+      to: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "mint(address)"(
       to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -498,8 +536,14 @@ export interface UniswapV2Pair extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  burn(
+  "burn(address)"(
     to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "burn(address,uint256)"(
+    from: PromiseOrValue<string>,
+    value: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -525,7 +569,13 @@ export interface UniswapV2Pair extends BaseContract {
 
   kLast(overrides?: CallOverrides): Promise<BigNumber>;
 
-  mint(
+  "mint(address,uint256)"(
+    to: PromiseOrValue<string>,
+    value: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "mint(address)"(
     to: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -614,12 +664,18 @@ export interface UniswapV2Pair extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    burn(
+    "burn(address)"(
       to: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
     >;
+
+    "burn(address,uint256)"(
+      from: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     decimals(overrides?: CallOverrides): Promise<number>;
 
@@ -643,7 +699,13 @@ export interface UniswapV2Pair extends BaseContract {
 
     kLast(overrides?: CallOverrides): Promise<BigNumber>;
 
-    mint(
+    "mint(address,uint256)"(
+      to: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "mint(address)"(
       to: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -796,8 +858,14 @@ export interface UniswapV2Pair extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    burn(
+    "burn(address)"(
       to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "burn(address,uint256)"(
+      from: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -815,7 +883,13 @@ export interface UniswapV2Pair extends BaseContract {
 
     kLast(overrides?: CallOverrides): Promise<BigNumber>;
 
-    mint(
+    "mint(address,uint256)"(
+      to: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "mint(address)"(
       to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -905,8 +979,14 @@ export interface UniswapV2Pair extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    burn(
+    "burn(address)"(
       to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "burn(address,uint256)"(
+      from: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -924,7 +1004,13 @@ export interface UniswapV2Pair extends BaseContract {
 
     kLast(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    mint(
+    "mint(address,uint256)"(
+      to: PromiseOrValue<string>,
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "mint(address)"(
       to: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;

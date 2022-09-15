@@ -54,7 +54,7 @@ contract UniswapV2Pair is IUniswapV2Pair, UniswapV2ERC20 {
         uint amount1In,
         uint amount0Out,
         uint amount1Out,
-        address indexed to
+        address indexed toxl
     );
     event Sync(uint112 reserve0, uint112 reserve1);
 

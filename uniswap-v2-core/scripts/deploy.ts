@@ -3,7 +3,7 @@ import { ethers } from "hardhat";
 async function main() {
 	// uniswap v2 factory contracts deployment
 	const factory = await ethers.getContractFactory("UniswapV2Factory");
-	let factory_address = await factory.deploy("0xbcB23907bd420000b2174d9aF306b7f25414160c"); // feeToSetter = 0xbcB23907bd420000b2174d9aF306b7f25414160c
+	let factory_address = await factory.deploy("0x287cf34b46797570c74BD367dC081B57d2A52A88"); // feeToSetter = 0x360FAa21A46de5B6e54cc7d58c19866e28270FEF
 	await factory_address.deployed();
   console.log("Factory Address: ", factory_address.address);
 

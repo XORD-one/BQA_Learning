@@ -1,6 +1,7 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "dotenv/config";
+import "@nomiclabs/hardhat-waffle";
 
 const { INFURA_API_KEY, PRIVATE_KEY } = process.env;
 const chainIds = {
@@ -56,7 +57,7 @@ export default {
   },
 
   etherscan: {
-    apiKey: "AJEFSY5AVH12AXB38DRSAGM4XEJUBK6CG1",
+    apiKey: "R4EM2ERTIYCWHXK1HBQMCD982Q1WSYJIEN",
   },
 };
 

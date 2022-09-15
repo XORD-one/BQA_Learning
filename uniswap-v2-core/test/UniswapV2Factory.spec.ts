@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai'
 import { Contract } from 'ethers'
-import { AddressZero } from 'ethers/constants'
-import { bigNumberify } from 'ethers/utils'
+// import { AddressZero } from 'ethers/constants'
+// import { bigNumberify } from 'ethers/utils'
 import { solidity, MockProvider, createFixtureLoader } from 'ethereum-waffle'
 
 import { getCreate2Address } from './shared/utilities'
