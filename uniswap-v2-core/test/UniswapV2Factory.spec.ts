@@ -5,7 +5,7 @@ import { Contract } from 'ethers'
 import { solidity, MockProvider, createFixtureLoader } from 'ethereum-waffle'
 
 import { getCreate2Address } from './shared/utilities'
-import { factoryFixture } from './shared/fixtures'
+import { factoryFixture } from './shared/fixtures1'
 
 import UniswapV2Pair from '../build/UniswapV2Pair.json'
 
