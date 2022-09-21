@@ -16,7 +16,7 @@ const total_supply = 100 // intial total supply
 const approval_amount = 50 // for giving approval to addr1
 const transfer_amount = 20  // for transfer to addr2
 const zero_address = '0x0000000000000000000000000000000000000000'       // burnable address
-const MINIMUM_LIQUIDITY = utils.bigNumberify(10).pow(3); // Min liquidity
+// const MINIMUM_LIQUIDITY = utils.bigNumberify(10).pow(3); // Min liquidity
 
 describe('Test Suite Uniswap v2 Pair', () => {
     // beforeEach(async function () {

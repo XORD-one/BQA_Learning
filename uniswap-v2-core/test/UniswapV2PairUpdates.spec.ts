@@ -31,7 +31,7 @@ describe('Test Suite Uniswap v2 Pair', () => {
             const expectedLiquidity = expandTo18Decimals(2)
             const MINIMUM_LIQUIDITY = BigNumber.from(10).pow(3)
 
-            await expect(pair['mint(address)'](owner.address))
+            await expect(pair['mint(address)'](owner.address, overrides))
                 .to.emit(pair, 'Transfer')
                 .withArgs(zeroAddress, zeroAddress, MINIMUM_LIQUIDITY)
                 .to.emit(pair, 'Transfer')

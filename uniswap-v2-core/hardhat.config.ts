@@ -3,7 +3,7 @@ import "@nomicfoundation/hardhat-toolbox";
 import "dotenv/config";
 import "@nomiclabs/hardhat-waffle";
 
-const { INFURA_API_KEY, PRIVATE_KEY } = process.env;
+const { INFURA_API_KEY, PRIVATE_KEY, ALCHAMEY_API_KEY } = process.env;
 const chainIds = {
   ganache: 1337,
   goerli: 5,
@@ -36,6 +36,12 @@ export default {
   },
   
   networks: {
+    hardhat: {
+      forking: {
+        url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHAMEY_API_KEY}`,
+        blockNumber: 14390000,
+      }
+    },
     goerli: {
       accounts: [PRIVATE_KEY],
       chainId: chainIds['goerli'],
